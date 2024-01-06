@@ -15,7 +15,8 @@
     "commands": [
       {
         "command": "svg-onselect.helloWorld",
-        "title": "Hello World"
+        "title": "Hello World",
+        "category": "svg-onselect"
       }
     ]
   },

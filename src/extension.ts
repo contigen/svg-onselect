@@ -18,8 +18,6 @@ function showSVGPanel(panel: vscode.WebviewPanel, selectedText: string) {
 export function activate(context: vscode.ExtensionContext) {
   let currentPanel: vscode.WebviewPanel | null;
 
-  console.log(`Congratulations, your extension "svg-onselect" is now active!`);
-
   let disposable = vscode.commands.registerCommand(
     "svg-onselect.displaySVG",
     () => {

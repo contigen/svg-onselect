@@ -5,14 +5,8 @@ function isSVG(text: string) {
   return SVGRegExp.test(text);
 }
 
-function showSVGPanel(selectedText: string) {
+function showSVGPanel(panel: vscode.WebviewPanel, selectedText: string) {
   if (isSVG(selectedText)) {
-    const panel = vscode.window.createWebviewPanel(
-      `svgViewer`,
-      `SVG Viewer`,
-      vscode.ViewColumn.One,
-      {}
-    );
     panel.webview.html = getWebviewContent(selectedText);
   } else {
     vscode.window.showInformationMessage(
@@ -20,23 +14,35 @@ function showSVGPanel(selectedText: string) {
     );
   }
 }
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
+
 export function activate(context: vscode.ExtensionContext) {
-  // Use the console to output diagnostic information (console.log) and errors (console.error)
-  // This line of code will only be executed once when your extension is activated
+  let currentPanel: vscode.WebviewPanel | null;
+
   console.log(`Congratulations, your extension "svg-onselect" is now active!`);
 
-  // The command has been defined in the package.json file
-  // Now provide the implementation of the command with registerCommand
-  // The commandId parameter must match the command field in package.json
   let disposable = vscode.commands.registerCommand(
-    "svg-onselect.helloWorld",
+    "svg-onselect.displaySVG",
     () => {
-      const editor = vscode.window.activeTextEditor;
+      const window = vscode.window;
+      const editor = window.activeTextEditor;
+      const targetColumn = editor?.viewColumn;
+      currentPanel ??= window.createWebviewPanel(
+        `svgViewer`,
+        `SVG Viewer`,
+        targetColumn || vscode.ViewColumn.One,
+        {}
+      );
+      currentPanel?.reveal(targetColumn);
       const selectedText = editor?.document.getText(editor.selection);
-      showSVGPanel(selectedText ?? ``);
-      vscode.window.showInformationMessage(`Hello World from svg-onselect.`);
+      showSVGPanel(currentPanel, selectedText ?? ``);
+      window.showInformationMessage(`Hello World from svg-onselect.`);
+      currentPanel.onDidDispose(
+        () => {
+          currentPanel = null;
+        },
+        null,
+        context.subscriptions
+      );
     }
   );
 

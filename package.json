@@ -15,10 +15,25 @@
     "commands": [
       {
         "command": "svg-onselect.displaySVG",
-        "title": "Hello World",
+        "title": "Display SVG",
         "category": "svg-onselect"
       }
-    ]
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "svg-onselect.displaySVG",
+          "when": "editorHasSelection"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "svg-onselect.displaySVG",
+          "when": "editorHasSelection",
+          "group": "1_modification"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

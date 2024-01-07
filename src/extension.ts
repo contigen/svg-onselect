@@ -1,7 +1,8 @@
 import * as vscode from "vscode";
 
-function isSVG(text: string): boolean {
-  return /<svg.*<\/svg>/i.test(text);
+function isSVG(text: string) {
+  const SVGRegExp = /<svg[^>]*>[\s\S]*<\/svg>/i;
+  return SVGRegExp.test(text);
 }
 
 function showSVGPanel(selectedText: string) {
@@ -9,10 +10,10 @@ function showSVGPanel(selectedText: string) {
     const panel = vscode.window.createWebviewPanel(
       "svgViewer",
       "SVG Viewer",
-      vscode.ViewColumn.Beside,
+      vscode.ViewColumn.One,
       {}
     );
-    panel.webview.html = selectedText;
+    panel.webview.html = getWebviewContent(selectedText);
   } else {
     vscode.window.showInformationMessage(
       "Selected text is not an SVG element."
@@ -32,18 +33,9 @@ export function activate(context: vscode.ExtensionContext) {
   let disposable = vscode.commands.registerCommand(
     "svg-onselect.helloWorld",
     () => {
-      // The code you place here will be executed every time your command is executed
-      // Display a message box to the user
-      const panel = vscode.window.createWebviewPanel(
-        "svgViewer",
-        "SVG Viewer",
-        vscode.ViewColumn.One,
-        {}
-      );
-      panel.webview.html = getWebviewContent();
-      // const editor = vscode.window.activeTextEditor;
-      // const selectedText = editor?.document.getText(editor.selection);
-      // showSVGPanel(selectedText ?? ``);
+      const editor = vscode.window.activeTextEditor;
+      const selectedText = editor?.document.getText(editor.selection);
+      showSVGPanel(selectedText ?? ``);
       vscode.window.showInformationMessage(
         `Hello World from svg-onselect, yay!`
       );
@@ -53,19 +45,18 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(disposable);
 }
 
-function getWebviewContent() {
+function getWebviewContent(svg: string) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cat Coding</title>
+    <title>SVG Select</title>
 </head>
-<body>
-    <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" width="300" />
+<body style="display:grid;place-items:center;height:100vh">
+    ${svg}
 </body>
 </html>`;
 }
 
-// This method is called when your extension is deactivated
 export function deactivate() {}

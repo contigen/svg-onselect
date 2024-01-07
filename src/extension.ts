@@ -33,7 +33,6 @@ export function activate(context: vscode.ExtensionContext) {
       currentPanel?.reveal(targetColumn);
       const selectedText = editor?.document.getText(editor.selection);
       showSVGPanel(currentPanel, selectedText ?? ``);
-      window.showInformationMessage(`Hello World from svg-onselect.`);
       currentPanel.onDidDispose(
         () => {
           currentPanel = null;

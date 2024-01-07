@@ -6,7 +6,7 @@ A VS Code extension to display SVG on selection.
 
 ## Features
 
-Extension command can be accessed in the command palette (`ctrl/cmd + shift + p`) or editor's context menu, **only when there's a selection.** <br/>
+Extension command can be accessed from the command palette (`ctrl/cmd + shift + p`) or editor's context menu, **only when there's a selection.** <br/>
 
 Command Palette
 ![Screenshot of command palette showing the extension command](<Screenshot from 2024-01-07 23-23-26.png>) <br/>

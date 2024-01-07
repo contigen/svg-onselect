@@ -8,15 +8,15 @@ function isSVG(text: string) {
 function showSVGPanel(selectedText: string) {
   if (isSVG(selectedText)) {
     const panel = vscode.window.createWebviewPanel(
-      "svgViewer",
-      "SVG Viewer",
+      `svgViewer`,
+      `SVG Viewer`,
       vscode.ViewColumn.One,
       {}
     );
     panel.webview.html = getWebviewContent(selectedText);
   } else {
     vscode.window.showInformationMessage(
-      "Selected text is not an SVG element."
+      `Selected text is not an SVG element.`
     );
   }
 }
@@ -36,9 +36,7 @@ export function activate(context: vscode.ExtensionContext) {
       const editor = vscode.window.activeTextEditor;
       const selectedText = editor?.document.getText(editor.selection);
       showSVGPanel(selectedText ?? ``);
-      vscode.window.showInformationMessage(
-        `Hello World from svg-onselect, yay!`
-      );
+      vscode.window.showInformationMessage(`Hello World from svg-onselect.`);
     }
   );
 
@@ -51,7 +49,7 @@ function getWebviewContent(svg: string) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SVG Select</title>
+    <title>View SVG on select</title>
 </head>
 <body style="display:grid;place-items:center;height:100vh">
     ${svg}

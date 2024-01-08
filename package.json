@@ -13,7 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/contigen/svg-onselect.git"
   },
-  "icon": "../assets/ArrowSquare-Linear-32px.jpg",
+  "icon": "./assets/ArrowSquare-Linear-32px.jpg",
   "version": "1.0.0",
   "engines": {
     "vscode": "^1.85.0"

@@ -11,9 +11,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/contigen/svg-onselect.git"
+    "url": "https://github.com/contigen/svg-onselect"
   },
-  "icon": "./assets/ArrowSquare-Linear-32px.jpg",
+  "icon": "./assets/icon.png",
   "version": "1.0.0",
   "engines": {
     "vscode": "^1.85.0"

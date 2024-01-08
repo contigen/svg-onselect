@@ -3,6 +3,9 @@
   "displayName": "svg-onselect",
   "description": "Display SVG on selection",
   "publisher": "contigen",
+  "author": {
+    "name": "contigen"
+  },
   "keywords": [
     "svg"
   ],

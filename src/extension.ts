@@ -5,18 +5,19 @@ function isSVG(text: string) {
   return SVGRegExp.test(text);
 }
 
-function showSVGPanel(panel: vscode.WebviewPanel, selectedText: string) {
-  if (isSVG(selectedText)) {
-    panel.webview.html = getWebviewContent(selectedText);
-  } else {
-    vscode.window.showInformationMessage(
-      `Selected text is not an SVG element.`
-    );
-  }
+function showSVGPanel(selectedText: string) {
+  const panel = vscode.window.createWebviewPanel(
+    `svgViewer`,
+    `SVG Viewer`,
+    vscode.ViewColumn.One,
+    {}
+  );
+  panel.webview.html = getWebviewContent(selectedText);
+  return panel;
 }
 
 export function activate(context: vscode.ExtensionContext) {
-  let currentPanel: vscode.WebviewPanel | null;
+  let currentPanel: vscode.WebviewPanel | undefined;
 
   let disposable = vscode.commands.registerCommand(
     "svg-onselect.displaySVG",
@@ -24,18 +25,19 @@ export function activate(context: vscode.ExtensionContext) {
       const window = vscode.window;
       const editor = window.activeTextEditor;
       const targetColumn = editor?.viewColumn;
-      currentPanel ??= window.createWebviewPanel(
-        `svgViewer`,
-        `SVG Viewer`,
-        targetColumn || vscode.ViewColumn.One,
-        {}
-      );
-      currentPanel?.reveal(targetColumn);
       const selectedText = editor?.document.getText(editor.selection);
-      showSVGPanel(currentPanel, selectedText ?? ``);
-      currentPanel.onDidDispose(
+      if (isSVG(selectedText ?? ``)) {
+        currentPanel ??= showSVGPanel(selectedText ?? ``);
+      } else {
+        vscode.window.showInformationMessage(
+          `Selected text is not an SVG element.`
+        );
+        return;
+      }
+      currentPanel?.reveal(targetColumn);
+      currentPanel?.onDidDispose(
         () => {
-          currentPanel = null;
+          currentPanel = undefined;
         },
         null,
         context.subscriptions

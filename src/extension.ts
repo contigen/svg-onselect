@@ -34,8 +34,8 @@ export function activate(context: vscode.ExtensionContext) {
         );
         return;
       }
-      currentPanel?.reveal(targetColumn);
-      currentPanel?.onDidDispose(
+      currentPanel.reveal(targetColumn);
+      currentPanel.onDidDispose(
         () => {
           currentPanel = undefined;
         },

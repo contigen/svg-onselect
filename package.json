@@ -1,8 +1,17 @@
 {
   "name": "svg-onselect",
   "displayName": "svg-onselect",
-  "description": "Display SVG on select",
-  "version": "0.0.1",
+  "description": "Display SVG on selection",
+  "publisher": "contigen",
+  "keywords": [
+    "svg"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/contigen/svg-onselect.git"
+  },
+  "icon": "../assets/ArrowSquare-Linear-32px.jpg",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.85.0"
   },

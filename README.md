@@ -9,6 +9,16 @@ Command Palette<br/>
 Context menu<br/>
 ![Screenshot of editor's context menu  showing the extension command](./assets/context.png)
 
+## Installation
+
+Launch VS Code Quick Open (Ctrl+P), paste the following command, and press enter.
+
+```bash
+ext install contigen.svg-onselect
+```
+
+[Link to VS Code Marketplace ](<[https://](https://marketplace.visualstudio.com/items?itemName=contigen.svg-onselect)>)
+
 ## Issues
 
 Open a PR if you have one.

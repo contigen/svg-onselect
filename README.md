@@ -17,7 +17,7 @@ Launch VS Code Quick Open (Ctrl+P), paste the following command, and press enter
 ext install contigen.svg-onselect
 ```
 
-[Link to VS Code Marketplace ](<[https://](https://marketplace.visualstudio.com/items?itemName=contigen.svg-onselect)>)
+[Link to VS Code Marketplace ](https://marketplace.visualstudio.com/items?itemName=contigen.svg-onselect)
 
 ## Issues
 

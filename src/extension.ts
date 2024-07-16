@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
 
 function isSVG(text: string) {
-  const SVGRegExp = /<svg[^>]*>[\s\S]*<\/svg>/i;
+  const SVGRegExp = /^<svg\b[^>]*>([\s\S]*?)<\/svg>$/is;
   return SVGRegExp.test(text);
 }
 
@@ -9,8 +9,7 @@ function showSVGPanel(selectedText: string) {
   const panel = vscode.window.createWebviewPanel(
     `svgViewer`,
     `SVG Viewer`,
-    vscode.ViewColumn.One,
-    {}
+    vscode.ViewColumn.One
   );
   panel.webview.html = getWebviewContent(selectedText);
   return panel;
@@ -30,7 +29,7 @@ export function activate(context: vscode.ExtensionContext) {
         currentPanel ??= showSVGPanel(selectedText ?? ``);
       } else {
         vscode.window.showInformationMessage(
-          `Selected text is not an SVG element.`
+          `Selected text is not valid SVG markup`
         );
         return;
       }
@@ -55,11 +54,20 @@ function getWebviewContent(svg: string) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View SVG on select</title>
+    <style>
+            .svg-container {
+                height: 100vh;
+                display:grid;
+                place-items:center;
+            }
+            svg {
+                width: 80%;
+                height: 80%;
+            }
+        </style>
 </head>
-<body style="display:grid;place-items:center;height:100vh">
-    ${svg}
+<body>
+    <div class="svg-container">${svg}</div>
 </body>
 </html>`;
 }
-
-export function deactivate() {}

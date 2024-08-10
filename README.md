@@ -7,7 +7,11 @@ Command Palette<br/>
 ![Screenshot of command palette showing the extension command](./assets/command-palette.png) <br/>
 
 Context menu<br/>
-![Screenshot of editor's context menu  showing the extension command](./assets/context.png)
+![shot of editor's context menu  showing the extension command](./assets/context.png)
+
+
+https://github.com/user-attachments/assets/5f0a22c9-3f54-427d-b6b3-2e4b81d0e756
+
 
 ## Installation
 
